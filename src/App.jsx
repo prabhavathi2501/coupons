@@ -1,5 +1,10 @@
 import axios from "axios"
 import { useEffect,useState } from "react"
+import Table from 'react-bootstrap/Table';
+import Container from 'react-bootstrap/Container';
+
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 function App() {
   let [data,setData]=useState([])
 
@@ -21,22 +26,37 @@ useEffect(()=>{
   getUsers()
 },[])
   return  <>
+       <Navbar bg="primary" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            
+            <Nav.Link href="#features"></Nav.Link>
+            <Nav.Link href="#pricing"></Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+     
       
-      <h1> welcome </h1>
-      <table>
-         <thead>
-          <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-            </tr>
-         </thead>
-         <tbody>
-         {
-            data.map((e)=>{
+      <h5 className="text-center"> Student Details </h5>
+     
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+            data.map((e,i)=>{
               return <tr key = {e._id}>
+                <td>{i+1}</td>
                 <td>{e.firstName}</td>
                 <td>{e.lastName}</td>
                 <td>{e.email}</td>
@@ -45,8 +65,10 @@ useEffect(()=>{
               </tr>
             })
           }
-         </tbody>
-      </table>
+      </tbody>
+    </Table>
+    
+   
     </>
   
 }
